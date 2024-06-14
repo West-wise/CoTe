@@ -1,16 +1,15 @@
 #include <iostream>
 #include <vector>
+#include <bitset>
 #include <algorithm>
-
 
 using namespace std;
 
 vector<vector<char>> board;
-vector<bool> visited(20, false);
+bitset<26> visited;
 
 int R, C;
 int answer = 0;
-
 
 void DFS(int x, int y, int depth){
     answer = max(answer, depth);
@@ -23,19 +22,19 @@ void DFS(int x, int y, int depth){
         if (nx >= 0 && nx < R && ny >= 0 && ny < C){
             if (!visited[board[nx][ny] - 'A']){
                 DFS(nx, ny, depth + 1);
-                visited[board[nx][ny] - 'A'] = false;
             }
         }
     }
 
+    // 방문 여부 초기화
+    visited[board[x][y] - 'A'] = false;
 }
-
 
 int main(){
     cin >> R >> C;
     board.resize(R, vector<char>(C, 0));
-    for(int i=0; i<R; i++){
-        for(int k=0; k<C; k++){
+    for(int i = 0; i < R; i++){
+        for(int k = 0; k < C; k++){
             cin >> board[i][k];
         }
     }
