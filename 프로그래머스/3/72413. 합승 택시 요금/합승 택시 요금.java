@@ -1,4 +1,9 @@
-import java.util.*;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.PriorityQueue;
+import java.util.Arrays;
+import java.util.Comparator;
+
 class Solution {
     static class Edge{
         int target;
@@ -39,8 +44,9 @@ class Solution {
         while(!pq.isEmpty()){
             Edge current = pq.poll();
             int currentNode = current.target;
-            if (visited[currentNode]) continue;
+            if (visited[currentNode]) continue; //이미 방문한 노드이면 패스
             visited[currentNode] = true;
+            // pq는 우선순위 큐로써 현재 src부터해서
             for(Edge neighbor : graph.get(currentNode)){
                 int nextNode = neighbor.target;
                 int newDistance = neighbor.weight + distance[currentNode];
