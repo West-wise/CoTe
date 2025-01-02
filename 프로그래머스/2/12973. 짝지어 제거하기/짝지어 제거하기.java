@@ -1,25 +1,25 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 class Solution
 {
     public int solution(String s)
     {
-        int answer = 0;
-        Stack<Character> st = new Stack<>();
-        
-        for(char c : s.toCharArray()){
-            if (!st.isEmpty() && st.peek() == c)
-                st.pop();
-            else
-                st.push(c);
+        Stack<Character> stack = s.chars().mapToObj(c -> (char)c).collect(Collectors.toCollection(Stack::new));
+        Stack<Character> tmp = new Stack<>();
+
+        while(!stack.isEmpty()){
+            if(tmp.isEmpty()){
+                tmp.push(stack.pop());
+                continue;
+            }
+            if(tmp.peek() == stack.peek()){
+                tmp.pop();
+                stack.pop();
+            } else{
+                tmp.push(stack.pop());
+            }
         }
-        
-        answer = (st.isEmpty()) ? 1 : 0;
-        
-
-        
-       
-
-        return answer;
+        return tmp.isEmpty() ? 1 : 0;
     }
 }
