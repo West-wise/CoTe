@@ -1,34 +1,26 @@
 import java.util.*;
-
 class Solution {
     public int[] solution(int[] progresses, int[] speeds) {
-        
-        Queue<Integer> q = new LinkedList<>();
-        ArrayList<Integer> al = new ArrayList<>() , speed = new ArrayList<>();
-        
-        for(int i : progresses){
-            q.offer(i);
+        Queue<Integer> queue = new ArrayDeque<>();
+        ArrayList<Integer> res = new ArrayList<>();
+        int[] dday = new int[progresses.length];
+        for(int i=0; i<progresses.length; i++) {
+            dday[i] = (int)Math.ceil((100.0-progresses[i])/speeds[i]);
         }
-        for(int i : speeds){
-            speed.add(i);
-        }
-        
-        while(!q.isEmpty()){
-            int cnt = 0;
-            for(int i=0; i<q.size(); i++){
-                if(q.peek()>=100) q.offer(q.poll());
-                else q.offer(q.poll()+speed.get(i));
-            }//진도율 더해서 큐에 넣기
-            while(!q.isEmpty() && q.peek()>=100){
+        Arrays.stream(dday).forEach(queue::add);
+
+        int cnt =0;
+        int MaxDay = dday[0];
+        for(int i=0; i<progresses.length; i++) {
+            if(dday[i] <= MaxDay){
                 cnt++;
-                q.poll();
-                speed.remove(0);
+            } else {
+                res.add(cnt);
+                cnt = 1;
+                MaxDay = dday[i];
             }
-            if(cnt>0)al.add(cnt);
         }
- 
-        
-        //ArrayList to int[]
-        return al.stream().mapToInt(i -> i).toArray();
+        res.add(cnt);
+        return res.stream().mapToInt(Integer::valueOf).toArray();
     }
 }
