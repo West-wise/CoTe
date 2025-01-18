@@ -1,0 +1,1 @@
+def solution(n,w): return next(([i%n+1,i//n+1] for i in range(1,len(w)) if w[i] in w[:i] or w[i-1][-1]!=w[i][0]),[0,0])
