@@ -1,38 +1,40 @@
 import java.util.*;
-class Solution {
-    public int DFS(Map<Integer,List<Integer>> graph,int start, Set<Integer> visited){
 
+class Solution {
+    public int DFS(Map<Integer, List<Integer>> graph, int start, Set<Integer> visited) {
         visited.add(start);
-        for(int neighbor : graph.get(start)){
-            if(!visited.contains(neighbor)){
-                DFS(graph,neighbor,visited);
+        int size = 1; // 현재 노드를 포함한 네트워크 그룹의 크기
+        for (int neighbor : graph.get(start)) {
+            if (!visited.contains(neighbor)) {
+                size += DFS(graph, neighbor, visited);
             }
         }
-
-
-        return 1;
+        return size;
     }
-    public int solution(int n, int[][] computers) {
-        // computes[n]의 n번째 요소는 자기자신을 나타낸다.
-        // 컴퓨터의 번호는 0~n-1까지이다.
-        Map<Integer, List<Integer>> map = new HashMap<>();
 
-        for(int i=0; i<computers.length; i++) {
-            for(int j=0; j<computers[i].length; j++) {
-                if(computers[i][j] == 1 && i!=j) {
-                    map.computeIfAbsent(i, k -> new ArrayList<>()).add(j);
+    public int solution(int n, int[][] computers) {
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+
+        // 그래프 생성
+        for (int i = 0; i < computers.length; i++) {
+            for (int j = 0; j < computers[i].length; j++) {
+                if (computers[i][j] == 1) {
+                    graph.computeIfAbsent(i, k -> new ArrayList<>()).add(j);
                 }
             }
         }
+
         int answer = 0;
         Set<Integer> visited = new HashSet<>();
-        for(int i=0; i<computers.length; i++) {
-            if(!visited.contains(i) && map.containsKey(i)) {
-                answer += DFS(map,i,visited);
-            } else if (!map.containsKey(i)) {
+
+        // 모든 노드를 탐색하며 네트워크 그룹의 개수를 센다
+        for (int i = 0; i < computers.length; i++) {
+            if (!visited.contains(i)) {
                 answer += 1;
+                DFS(graph, i, visited);
             }
         }
+
         return answer;
     }
 }
