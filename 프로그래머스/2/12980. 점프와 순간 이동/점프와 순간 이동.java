@@ -1,20 +1,17 @@
 import java.util.*;
 
-public class Solution {
+class Solution {
     public int solution(int n) {
-        //이동하려는 거리 n
         int ans = 0;
-        
-        while(n>0){
-            if(n%2 == 0){
+        // k칸 앞으로 점프 or 현재까지 온거리 * 2
+        while(n > 0){
+            if(n % 2 == 0){
                 n/=2;
-            }
-            else{
-                ans++;
+            } else {
                 n--;
+                ans++;
             }
         }
-
         return ans;
     }
 }
