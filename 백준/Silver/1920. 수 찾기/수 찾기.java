@@ -3,13 +3,17 @@ import java.util.*;
 
 public class Main {
     public static int N,M;
-    public static boolean binary_search(int[] array, int target, int start, int end){
-        if(start > end) return false;
-        int mid = start+(end-start)/2;
+    public static boolean binary_search(int[] array, int target){
+        int start = 0;
+        int end = array.length - 1;
 
-        if(array[mid] == target) return true;
-        else if(array[mid] < target) return binary_search(array, target, mid + 1, end);
-        else return binary_search(array, target, start, mid - 1);
+        while(start <= end){
+            int mid = start + (end - start)/2;
+            if(array[mid] == target) return true;
+            else if(array[mid] < target) start = mid + 1;
+            else end = mid - 1;
+        }
+        return false;
     }
     public static void main(String[] args) throws IOException {
         // 입력을 빠르게 받기 위한 BufferedReader 사용
@@ -30,8 +34,10 @@ public class Main {
             array2[i] = Integer.parseInt(st.nextToken());
         }
 
-        for(int i : array2){
-            System.out.println(binary_search(array1, i , 0, N-1) ? 1 : 0);
+        StringBuilder sb = new StringBuilder();
+        for (int i : array2) {
+            sb.append(binary_search(array1, i) ? "1\n" : "0\n");
         }
+        System.out.print(sb);
     }
 }
