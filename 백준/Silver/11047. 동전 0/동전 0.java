@@ -20,6 +20,7 @@ public class Main {
                 result += M/arr[i];
                 M %= arr[i];
             }
+            if(M == 0) break;
         }
         System.out.println(result);
     }
