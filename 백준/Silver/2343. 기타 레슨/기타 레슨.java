@@ -38,9 +38,13 @@ public class Main {
         M = Integer.parseInt(st.nextToken());
         int[] array = new int[N];
         st = new StringTokenizer(input.readLine());
+        int max = 0, sum = 0;
         for(int i = 0; i < N; i++){
-            array[i] = Integer.parseInt(st.nextToken());
+            int nextInt = Integer.parseInt(st.nextToken());
+            array[i] = nextInt;
+            max = Math.max(max, nextInt);
+            sum += nextInt;
         }
-        System.out.println(binary_search(array, Arrays.stream(array).max().orElse(0), Arrays.stream(array).sum()));
+        System.out.println(binary_search(array, max, sum));
     }
 }
