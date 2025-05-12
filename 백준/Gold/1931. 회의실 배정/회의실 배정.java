@@ -29,15 +29,15 @@ public class Main {
         });
 
         int end_time = arr.get(0)[1];
-        arr.remove(0);
         int result = 1;
-        for(int[] tmp : arr){
+
+        for(int i = 1; i < N; i++){
+            int[] tmp = arr.get(i);
             if(end_time <= tmp[0]){
                 result++;
                 end_time = tmp[1];
             }
         }
         System.out.println(result);
-
     }
 }
