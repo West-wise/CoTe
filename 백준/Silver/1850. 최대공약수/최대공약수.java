@@ -10,16 +10,6 @@ public class Main {
         }
         return a;
     }
-    public static long makeOneNum(long digit){
-        long tmp = 0;
-        long unit = 1;
-        for(int i = 0; i < digit; i++){
-            tmp+= unit;
-            unit *= 10;
-        }
-        return tmp;
-    }
-
     public static void main(String[] args) throws IOException {
         // 입력을 빠르게 받기 위한 BufferedReader 사용
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
@@ -27,11 +17,11 @@ public class Main {
         N = Long.parseLong(st.nextToken());
         M = Long.parseLong(st.nextToken());
         long digit = gcd(N,M);
-        StringBuilder sb = new StringBuilder();
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
         for(long i = 0; i<digit; i++){
-            sb.append(1);
+            bw.write('1');
         }
-        System.out.println(sb.toString());
-
+        bw.flush();
+        bw.close();
     }
 }
