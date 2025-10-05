@@ -1,22 +1,13 @@
-import java.util.Arrays;
-
+import java.util.*;
 class Solution {
     public int[] solution(String my_string) {
-        int[] temp = new int[my_string.length()];
-        int count = 0;
-        for (int i = 0; i < my_string.length(); i++) {
-            char c = my_string.charAt(i);
-            if (c >= '0' && c <= '9') {
-                temp[count] = c - '0';
-                count++;
+        List<Integer> answer = new ArrayList<>();
+        int[] uni = my_string.chars().toArray();
+        for( int ch : uni){
+            if(ch >= '0' && ch <= '9'){
+                answer.add(ch - '0');
             }
         }
-        if (count == 0) {
-            return new int[0];
-        }
-        int[] answer = Arrays.copyOf(temp, count);
-        Arrays.sort(answer);
-
-        return answer;
+        return answer.stream().sorted().mapToInt(Integer::intValue).toArray();
     }
 }
