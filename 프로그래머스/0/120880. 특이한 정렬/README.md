@@ -1,10 +1,10 @@
 # [level 0] 특이한 정렬 - 120880 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/120880?language=java) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/120880) 
 
 ### 성능 요약
 
-메모리: 78.6 MB, 시간: 5.32 ms
+메모리: 89.4 MB, 시간: 5.88 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 09월 14일 18:48:13
+2025년 10월 05일 19:11:40
 
 ### 문제 설명
 
