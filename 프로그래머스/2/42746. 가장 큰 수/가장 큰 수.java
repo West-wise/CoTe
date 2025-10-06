@@ -1,21 +1,19 @@
 import java.util.*;
 class Solution {
     public String solution(int[] numbers) {
-        List<String> answer = new ArrayList<>();
-        for(int number : numbers){
-            answer.add(String.valueOf(number));
+        StringBuilder answer = new StringBuilder();
+        List<String> list = new ArrayList<>();
+        for(int num : numbers){
+            list.add(String.valueOf(num));
         }
-
-        answer.sort((o1,o2) ->{
-            int a = Integer.parseInt(o1 + o2);
-            int b = Integer.parseInt(o2 + o1);
-            return Integer.compare(b,a);
+        list.sort((a,b)->{
+            int ab = Integer.parseInt(a+b);
+            int ba = Integer.parseInt(b+a);
+            return Integer.compare(ba,ab);
+        });
+        for(String num : list){
+            answer.append(num);
         }
-        );
-        StringBuilder sb = new StringBuilder();
-        for(String s : answer){
-            sb.append(s);
-        }
-        return sb.charAt(0) == '0' ? "0" : sb.toString();
+        return answer.charAt(0) == '0' ? "0" : answer.toString();
     }
 }
