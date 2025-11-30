@@ -1,11 +1,13 @@
+import java.util.*;
 class Solution {
     public int solution(int[][] triangle) {
-        int[][] dp = triangle;
-        for(int i = dp.length-1; i >= 0 ; i--) {
-            for(int k = 0; k < dp[i].length-1; k++) {
-                dp[i-1][k] = Math.max(triangle[i-1][k] + dp[i][k] , triangle[i-1][k] + dp[i][k+1]);
+        int t_len = triangle.length-1;
+        int[] dp = Arrays.copyOf(triangle[t_len], triangle[t_len].length);
+        for(int i = t_len-1; i>=0; i--){
+            for(int k = 0; k<triangle[i].length; k++){
+                dp[k] = Math.max(dp[k], dp[k+1]) + triangle[i][k];
             }
         }
-        return dp[0][0];
+        return dp[0];
     }
 }
