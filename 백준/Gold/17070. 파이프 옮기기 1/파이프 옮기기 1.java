@@ -1,5 +1,6 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -38,6 +39,10 @@ public class Main {
                 }
             }
         }
-        System.out.println(Arrays.stream(dp[n-1][n-1]).sum());
+        int ans = 0;
+        for(int way : dp[n-1][n-1]){
+            ans += way;
+        }
+        System.out.println(ans);
     }
 }
