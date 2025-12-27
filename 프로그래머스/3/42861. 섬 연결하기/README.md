@@ -1,10 +1,10 @@
 # [level 3] 섬 연결하기 - 42861 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42861) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/42861?language=cpp) 
 
 ### 성능 요약
 
-메모리: 83.3 MB, 시간: 3.79 ms
+메모리: 4.16 MB, 시간: 0.03 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 12월 28일 00:10:20
+2025년 12월 28일 01:26:49
 
 ### 문제 설명
 
