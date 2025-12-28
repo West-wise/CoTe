@@ -24,14 +24,14 @@ int main()
         if (a.second != b.second) return a.second < b.second;
         return a.first < b.first;
     });
-    int answer = 1;
-    int end = meeting[0].second;
-    for (int i = 1; i<N; i++)
+    int answer = 0;
+    int start = 0;
+    for (const auto& p: meeting)
     {
-        if (end <= meeting[i].first)
+        if (start <= p.first)
         {
             answer++;
-            end = meeting[i].second;
+            start = p.second;
         }
     }
     cout << answer << "\n";
