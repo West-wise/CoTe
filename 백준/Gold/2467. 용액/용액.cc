@@ -4,13 +4,6 @@
 #include <iomanip>
 using namespace std;
 
-inline void compare_diff(pair<int, int>& diff, pair<int, int> li)
-{
-    int tmp1 = abs(diff.second + diff.first);
-    int tmp2 = abs(li.second + li.first);
-    if (tmp1 > tmp2) diff = li;
-}
-
 int main()
 {
     ios::sync_with_stdio(false);
@@ -23,7 +16,7 @@ int main()
 
     int right = N-1;
     int left = 0;
-    pair<int, int> diff = {0,INT_MAX};
+    pair<int, int> diff = {0,2'000'000'001};
 
     while (left < right)
     {
@@ -33,7 +26,8 @@ int main()
             diff = {liquid[left], liquid[right]};
             break;
         }
-        compare_diff(diff, {liquid[left], liquid[right]});
+        int tmp2 = abs(diff.first+diff.second);
+        if (tmp2 > abs(tmp)) diff = {liquid[left], liquid[right]};
         if (tmp < 0) left++;
         else right--;
     }
