@@ -1,49 +1,64 @@
-#include <iostream>
-#include <map>
-#include <vector>
-
+#include <bits/stdc++.h>
 using namespace std;
+
 using ll = long long;
 
 int main() {
     ios_base::sync_with_stdio(false);
-    cin.tie(nullptr); cout.tie(nullptr);
+    cin.tie(nullptr);
 
-    int T,N,M;
-    long long ans = 0;
+    ll T;
+    int N, M;
     cin >> T;
+
     cin >> N;
-    vector<int> arrA(N);
-    for (int i = 0; i<N; i++) cin >> arrA[i];
+    vector<ll> arrA(N);
+    for (int i = 0; i < N; i++) cin >> arrA[i];
+
     cin >> M;
-    vector<int> arrB(M);
-    for (int i = 0; i<M; i++) cin >> arrB[i];
+    vector<ll> arrB(M);
+    for (int i = 0; i < M; i++) cin >> arrB[i];
 
-    map<ll,ll> mapA,mapB;
+    // === 부분합 저장용 벡터 ===
+    vector<ll> SA, SB;
 
-    for (int i = 0; i<N; i++)
-    {
-        int tmp = 0;
-        for (int k = i; k<N; k++)
-        {
-            tmp += arrA[k];
-            mapA[tmp]++;
+    // [수정/최적화] 정확한 개수만큼 reserve → 재할당 방지
+    SA.reserve((ll)N * (N + 1) / 2);
+    SB.reserve((ll)M * (M + 1) / 2);
+
+    // === A의 모든 연속 부분합 ===
+    for (int i = 0; i < N; i++) {
+        ll sum = 0;               // [수정] int → ll (오버플로우 방지)
+        for (int j = i; j < N; j++) {
+            sum += arrA[j];
+            SA.push_back(sum);
         }
     }
-    for (int i = 0; i<M; i++)
-    {
-        int tmp = 0;
-        for (int k = i; k<M; k++)
-        {
-            tmp += arrB[k];
-            mapB[tmp]++;
+
+    // === B의 모든 연속 부분합 ===
+    for (int i = 0; i < M; i++) {
+        ll sum = 0;               // [수정] int → ll
+        for (int j = i; j < M; j++) {
+            sum += arrB[j];
+            SB.push_back(sum);
         }
     }
-    for (const auto& [Ka,Va] : mapA)
-    {
-        auto it = mapB.find(T - Ka);
-        if (it != mapB.end()) ans += Va * (it->second);
+
+    // === B 부분합 정렬 ===
+    sort(SB.begin(), SB.end());
+
+    ll ans = 0;
+
+    // === 핵심: 이분 탐색으로 개수 계산 ===
+    for (size_t i = 0; i < SA.size(); i++) {
+        ll need = T - SA[i];
+
+        auto low = lower_bound(SB.begin(), SB.end(), need);
+        auto high = upper_bound(SB.begin(), SB.end(), need);
+
+        ans += (high - low);   // [핵심] 동일 값 개수를 한 번에 누적
     }
-    cout <<ans;
+
+    cout << ans;
     return 0;
 }
