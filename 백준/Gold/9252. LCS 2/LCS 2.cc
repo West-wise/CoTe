@@ -26,25 +26,19 @@ int main() {
             }
         }
     }
-    int lcs = dp[n][m];
-    for (int i = n; i >= 1; i--)
-    {
-        for (int k = m; k >= 1; k--)
-        {
-            if (str1[i-1] == str2[k-1] && dp[i][k] == lcs)
-            {
-                ans += str2[k-1];
-                lcs--;
-                break;
-            }
+    int i = n, j = m;
+    while (i > 0 && j > 0) {
+        if (str1[i-1] == str2[j-1]) {
+            ans.push_back(str1[i-1]);
+            i--; j--;
+        } else if (dp[i-1][j] >= dp[i][j-1]) {
+            i--;
+        } else {
+            j--;
         }
     }
     cout << dp[n][m]<<"\n";
-    if (dp[n][m] != 0)
-    {
-        reverse(ans.begin(), ans.end());
-        cout << ans;
-    }
-
+    reverse(ans.begin(), ans.end());
+    if (dp[n][m] != 0) cout << ans;
     return 0;
 }
