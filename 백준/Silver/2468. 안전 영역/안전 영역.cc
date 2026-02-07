@@ -25,17 +25,16 @@ int dfs(const vector<vector<int>>& area, vector<vector<bool>>& visited, int x, i
 int main(){
     cin >> N;
     vector<vector<int>> area(vector<vector<int>>(N, vector<int>(N, 0)));
-    int ans = 0, max_height = 0;
+    int ans = 0;
     for (int i = 0; i < N; i++)
     {
         for (int k = 0; k < N; k++)
         {
             cin >> area[i][k];
-            max_height = max(area[i][k], max_height);
         }
     }
 
-    for (int limit = 0; limit < max_height; limit++)
+    for (int limit = 0; limit <= 100; limit++)
     {
         vector<vector<bool>> visited(N, vector<bool>(N, false));
         int tmp = 0;
